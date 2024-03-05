@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppBar, Badge, Box, IconButton, Toolbar, Typography, alpha, styled, InputBase, Menu, MenuItem } from "@mui/material";
 import { colors } from "../constants/Colors";
 
 import { INavBarProps } from "../interfaces/NavBar.Interface";
 
+/* Icons */
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -51,6 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 export function NavBar( { hidden = false } : INavBarProps) {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -75,6 +78,18 @@ export function NavBar( { hidden = false } : INavBarProps) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleProfileButton = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    navigate("/perfil");
+  }
+
+  const handleLogout = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    navigate("/login");
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -92,8 +107,12 @@ export function NavBar( { hidden = false } : INavBarProps) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Ver perfil</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
+      <MenuItem onClick={handleProfileButton}>
+        Ver perfil
+      </MenuItem>
+      <MenuItem onClick={handleLogout}>
+        Cerrar sesión
+      </MenuItem>
     </Menu>
   );
 
@@ -143,7 +162,7 @@ export function NavBar( { hidden = false } : INavBarProps) {
 
 
   return (
-    <Box color={colors.primary} flex={1} justifyItems={"flex-start"}>
+    <Box flex={1} justifyItems={"flex-start"}>
       {!hidden && <>
         <AppBar position="fixed" enableColorOnDark sx={{ 
           backgroundColor: colors.primary,
@@ -175,6 +194,16 @@ export function NavBar( { hidden = false } : INavBarProps) {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+                onClick={()=>{}}
+            >
+              <Badge badgeContent={17} color="error">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
               size="large"
               edge="end"
               aria-label="account of current user"
@@ -190,16 +219,6 @@ export function NavBar( { hidden = false } : INavBarProps) {
                 Juan Kaslana
               </Typography>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton

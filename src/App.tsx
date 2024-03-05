@@ -7,10 +7,9 @@ import { Box, CssBaseline } from '@mui/material';
 import { AuthProvider } from "./context/AuthContext";
 import useAuthContext from "./hooks/useAuthContext";
 /* Assets */
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { Layout } from './components/Layout';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -19,7 +18,15 @@ function App() {
           <Layout>
             <CssBaseline/>
             <Routes>
-              
+              <Route path="/" element={<Login/>}/>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/solicitudes" element={<Login/>}/>
+              <Route path="/tickets" element={<Login/>}/>
+              <Route path="/servicios" element={<Login/>}/>
+              <Route path="/equipos" element={<Login/>}/>
+              <Route path="/personal" element={<Login/>}/>
+              <Route path="/configuracion" element={<Login/>}/>
+              <Route path="/perfil" element={<Login/>}/>
             </Routes>
           </Layout>
       </Router>
