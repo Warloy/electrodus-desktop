@@ -3,7 +3,7 @@ import { Button,
       Box,
       Typography, 
       Card,
-      Link} from '@mui/material';
+      Link } from '@mui/material';
 import { colors } from '../constants/Colors';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,13 +14,15 @@ export default function Login() {
     <Card
       sx={{
         padding: 2,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: colors.background
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: colors.background,
+        justifySelf: "Center"
       }}
     >
       <Card sx ={{
+          maxWidth:"50%",
           boxShadow:0,
           backgroundColor: colors.transparent
         }}

@@ -211,6 +211,9 @@ export function NavBar( { hidden = false } : INavBarProps) {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
+              sx = {{
+                borderRadius: 1
+              }}
             >
               <AccountCircle />
               <Typography

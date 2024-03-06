@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Box, Container } from "@mui/material";
+import { Box, Card } from "@mui/material";
 import { NavBar } from "./NavBar"
 import { SideBar } from "./SideBar"
 import { ILayoutProps } from "../interfaces/Layout.Interface"
@@ -35,25 +35,24 @@ export function Layout ( { children } : ILayoutProps) {
   }, [hide])
 
   return (
-    <Box sx={{ display: "flex", backgroundColor: colors.background }}>
+    <Box sx = {{ display: "flex", minWidth: "100vh", minHeight: "92vh" }}>
       <NavBar hidden={hide}/>
       <SideBar hidden={hide}/>
-      <Container
-          component="main"
-          sx={{
-            backgroundColor: colors.background,
-            flexGrow: 1,
-            width: `calc(100% - ${boxMargin}px)`,
-            maxWidth: `calc(100% - ${boxMargin}px)`,
-            height: "100%",
-            overflow: "auto",
-            flexDirection: "column",
-            justifyContent: "flex-start"
-          }}
-          disableGutters
-        >
+      <Card
+        component="main"
+        sx={{
+          backgroundColor: colors.background,
+          width: `calc(100% - ${boxMargin}px)`,
+          maxWidth: `calc(100% - ${boxMargin}px)`,
+          maxHeight:"100%",
+          height: "100%",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          boxShadow: 0
+        }}
+      >
           {children}
-        </Container>
+      </Card>
     </Box>
   );
 }
