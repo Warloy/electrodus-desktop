@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppBar, Badge, Box, IconButton, Toolbar, Typography, alpha, styled, InputBase, Menu, MenuItem } from "@mui/material";
-import { colors } from "../constants/Colors";
+import useAuthContext from "../hooks/useAuthContext";
+import { useAppDispatch } from "../hooks/useRedux";
+import { logout } from "../features/user/userSlice";
+import { setSession } from "../services/jwt";
 
 import { INavBarProps } from "../interfaces/NavBar.Interface";
 
+import { colors } from "../constants/Colors";
 /* Icons */
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SearchIcon from '@mui/icons-material/Search';
@@ -54,6 +58,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export function NavBar( { hidden = false } : INavBarProps) {
   const navigate = useNavigate();
+  const { dispatch } = useAuthContext();
+  const appDispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -85,8 +91,12 @@ export function NavBar( { hidden = false } : INavBarProps) {
   }
 
   const handleLogout = () => {
+    console.log("Logout button pressed");
     setAnchorEl(null);
     handleMobileMenuClose();
+    appDispatch(logout());
+    dispatch({ type: "LOGOUT" });
+    setSession(null);
     navigate("/login");
   };
 

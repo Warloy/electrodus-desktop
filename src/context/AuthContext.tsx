@@ -1,7 +1,8 @@
-import React, { createContext, useEffect, useState, useReducer } from "react";
+import { createContext, useEffect, useState, useReducer } from "react";
 import { IAuthAction, IAuthContextType, IAuthState, IAuthProviderProps } from "../interfaces/AuthContext.Interface";
 import { setSession } from "../services/jwt";
 import { SESSION_KEY } from "../constants/Session";
+import RouteRedirector from "./RouteRedirector";
 
 export const AuthContext = createContext<IAuthContextType>({} as IAuthContextType)
 
@@ -51,6 +52,7 @@ const stateReducer = (state: IAuthState, action: IAuthAction): IAuthState => {
 export const AuthProvider = ({ children } : IAuthProviderProps ) => {
   const [state, dispatch] = useReducer(stateReducer, initialState);
   const [authInitialized, setAuthInitialized] = useState<boolean>(false);
+
   useEffect(() => {
     const initialize = async () => {
       try {
@@ -107,6 +109,11 @@ export const AuthProvider = ({ children } : IAuthProviderProps ) => {
 
     initialize();
   }, []);
+
+  useEffect(()=>{
+    if (!authInitialized) return;
+    RouteRedirector
+  }, [state, authInitialized])
 
   return (
     <AuthContext.Provider

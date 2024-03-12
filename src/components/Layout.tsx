@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+/* import { useLocation } from "react-router-dom"; Deprecated by the appselector hook */
 import { Box, Card } from "@mui/material";
 import { NavBar } from "./NavBar"
 import { SideBar } from "./SideBar"
 import { ILayoutProps } from "../interfaces/Layout.Interface"
 import { colors } from "../constants/Colors";
+import { useAppSelector } from "../hooks/useRedux";
 
 export function Layout ( { children } : ILayoutProps) {
-  const location = useLocation();
+  /* const location = useLocation(); Deprecated by the appselector hook*/ 
   const [hide, setHide] = useState(false)
   const [boxMargin, setBoxMargin] = useState(0)
-
+  const authUser = useAppSelector(state => state.user.user)
   /* Handles the hidden property of the layout */
-  useEffect(() => {
+  useEffect(()=>{
+    setHide(authUser ? false : true)
+  }, [authUser])
+  /* useEffect(() => {
     switch (true) {
       case location.pathname.includes("/login"):
         setHide(true);
@@ -26,7 +30,7 @@ export function Layout ( { children } : ILayoutProps) {
       default:
         setHide(false);
     }
-  }, [location]);
+  }, [location]); */
 
   
   /* Handles the Box margin property of the layout */

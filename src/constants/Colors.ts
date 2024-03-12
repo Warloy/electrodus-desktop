@@ -12,5 +12,11 @@ export const colors = {
   gray4: "#333333",
   gray5: "#111111",
   white: "#FFFFFF",
-  transparent: "rgba(0,0,0,0%)"
+  transparent: "rgba(0,0,0,0%)",
+  error: {
+    primary: "#d95f5f",
+    secondary: "#f52556",
+    bgError: "#fce1e1",
+    warning: "#f57f25",
+  }
 }
