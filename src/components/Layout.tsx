@@ -39,17 +39,18 @@ export function Layout ( { children } : ILayoutProps) {
   }, [hide])
 
   return (
-    <Box sx = {{ display: "flex", minWidth: "100vh", minHeight: "92vh" }}>
+    <Box sx = {{ position: "relative", display: "flex", width: "100vw", minHeight: "100vh" }}>
       <NavBar hidden={hide}/>
       <SideBar hidden={hide}/>
       <Card
         component="main"
         sx={{
-          backgroundColor: colors.background,
-          width: `calc(100% - ${boxMargin}px)`,
-          maxWidth: `calc(100% - ${boxMargin}px)`,
-          maxHeight:"100%",
-          height: "100%",
+          mt:6.5,
+          backgroundColor: colors.secondary,
+          minWidth: `calc(100vw - ${boxMargin}px)`,
+          maxWidth: `calc(100vw - ${boxMargin}px)`,
+          minHeight: "94vh",
+          maxHeight:"94vh",
           flexDirection: "column",
           justifyContent: "flex-start",
           boxShadow: 0
