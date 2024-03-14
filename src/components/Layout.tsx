@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 /* import { useLocation } from "react-router-dom"; Deprecated by the appselector hook */
-import { Box, Card } from "@mui/material";
+import { Box } from "@mui/material";
 import { NavBar } from "./NavBar"
 import { SideBar } from "./SideBar"
 import { ILayoutProps } from "../interfaces/Layout.Interface"
@@ -39,25 +39,26 @@ export function Layout ( { children } : ILayoutProps) {
   }, [hide])
 
   return (
-    <Box sx = {{ position: "relative", display: "flex", width: "100vw", minHeight: "100vh" }}>
+    <Box sx = {{ m: "auto", position: "relative", display: "flex", width: "100vw", minHeight: "100vh" }}>
       <NavBar hidden={hide}/>
       <SideBar hidden={hide}/>
-      <Card
+      <Box
         component="main"
         sx={{
           mt:6.5,
-          backgroundColor: colors.secondary,
+          backgroundColor: colors.transparent,
           minWidth: `calc(100vw - ${boxMargin}px)`,
           maxWidth: `calc(100vw - ${boxMargin}px)`,
           minHeight: "94vh",
           maxHeight:"94vh",
           flexDirection: "column",
           justifyContent: "flex-start",
-          boxShadow: 0
+          boxShadow: 0,
+          overflow: "auto"
         }}
       >
           {children}
-      </Card>
+      </Box>
     </Box>
   );
 }
